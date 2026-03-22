@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Princesa ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <section id="pantalla1" class="active">
+        <div class="content">
+            <h1>¿Me amas mucho?</h1>
+            <div class="btn-container">
+                <button class="btn-gerbera" onclick="irA('pantalla2')">SÍ</button>
+                <button id="btnNo" class="btn-gerbera">NO</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pantalla2">
+        <div class="content">
+            <h1>¿Mucho o poquito?</h1>
+            <div class="btn-container">
+                <button class="btn-gerbera" onclick="irA('pantalla3')">Mucho</button>
+                <button id="btnPoquito" class="btn-gerbera">Poquito</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pantalla3">
+        <div class="content">
+            <h1>¿Qué desea saber mi princesa?</h1>
+            <div class="btn-main-container">
+                <button class="btn-rect" onclick="iniciarTransicion()">3 cosas que me gustan de ti</button>
+                <div class="btn-meta-wrapper">
+                    <button class="btn-rect disabled">Mis metas contigo...</button>
+                    <span class="proximamente">disponible próximamente...</span>
+                </div>
+            </div>
+        </div>
+        <div id="jardin"></div>
+    </section>
+
+    <section id="pantalla4">
+        <div class="content">
+            <h1 class="texto-grande">¿De verdad creíste que solo serían 3 cosas?</h1>
+        </div>
+    </section>
+
+    <section id="pantalla5">
+        <div class="header-mosaico">
+            <h1>100 cosas que me encantan de ti</h1>
+        </div>
+        <div id="mosaico-container"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-const misFotosDeCarga = ['Foto', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
+const misFotosDeCarga = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
 const razonesOriginales = [
     "Me encanta tu sonrisa al despertar.",
     "Amo cómo te brillan los ojos cuando hablas de código.",
@@ -27,42 +27,32 @@ window.onload = () => {
         loader.style.opacity = '0';
         setTimeout(() => {
             loader.remove();
-            // Eliminamos iniciarMusica de aquí porque el navegador lo bloquea
         }, 1000);
     }, 5000);
 };
 
-function iniciarMusica() {
+// Función simple de reproducción
+function reproducirMusica() {
     const musica = document.getElementById('musica');
-    // Solo intentamos reproducir si no está sonando ya
     if (musica.paused) {
-        musica.volume = 0;
-        musica.play().then(() => {
-            let vol = 0;
-            const interval = setInterval(() => {
-                if (vol < 0.5) {
-                    vol += 0.05;
-                    musica.volume = Math.min(vol, 0.5);
-                } else { clearInterval(interval); }
-            }, 300);
-        }).catch(err => console.log("Esperando interacción..."));
+        musica.volume = 0.5; // Iniciamos directo al 50% como pediste
+        musica.play().catch(error => console.log("Esperando clic para sonar"));
     }
 }
 
 function irA(id) {
-    // CORRECCIÓN: Al hacer clic en cualquier botón para cambiar de pantalla,
-    // el navegador ya nos permite activar el sonido.
-    iniciarMusica();
+    // Al hacer clic en cualquier botón, se activa la música sin rodeos
+    reproducirMusica();
 
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+    
     if(id === 'pantalla3') generarJardin();
 }
 
 // Botones juguetones
 document.getElementById('btnNo').addEventListener('click', function() {
-    // También iniciamos música aquí por si interactúa con este botón primero
-    iniciarMusica();
+    reproducirMusica(); // También aquí por si acaso
     this.style.position = 'fixed';
     this.style.top = Math.random() * 80 + 10 + '%';
     this.style.left = Math.random() * 80 + 10 + '%';

@@ -1,15 +1,16 @@
-// 1. CONFIGURACIÓN: Agrega tus fotos y razones
-const misFotosDeCarga = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg']; // FOTOS PARA EL INICIO
+// 1. CONFIGURACIÓN
+const misFotosDeCarga = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
+
 const razones = [
     "Me encanta tu sonrisa al despertar.",
     "Amo cómo te brillan los ojos cuando hablas de código.",
     "Eres mi mejor debug en los días difíciles.",
-    // RELLENA LAS 100 AQUÍ
+    // RELLENA AQUÍ TODAS LAS DEMÁS
 ];
 
 let cartasAbiertas = 0;
 
-// Lógica de Pantalla de Carga
+// 2. CARGA (Tu lógica original de 5 segundos)
 window.onload = () => {
     const stack = document.getElementById('photo-stack');
     misFotosDeCarga.forEach((foto, i) => {
@@ -22,48 +23,55 @@ window.onload = () => {
 
     setTimeout(() => {
         const loader = document.getElementById('loader');
-        loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 1000);
-    }, 4000); // 4 segundos de intro
+        if(loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.remove(), 1000);
+        }
+    }, 5000);
 };
 
+// 3. MÚSICA Y NAVEGACIÓN (Copiado de tu versión funcional)
 function irA(id) {
     const musica = document.getElementById('musica');
-    musica.play().catch(() => console.log("Esperando interacción para música"));
+    // Si existe el elemento, darle play directo. Sin fade-in, sin vueltas.
+    if (musica) {
+        musica.play().catch(e => console.log("Clic necesario"));
+    }
     
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     const proxima = document.getElementById(id);
-    proxima.classList.add('active');
+    if (proxima) proxima.classList.add('active');
     
     if(id === 'pantalla3') generarJardin();
 }
 
-// Botones juguetones
-const btnNo = document.getElementById('btnNo');
-let scaleNo = 1;
-btnNo.addEventListener('click', () => {
-    scaleNo -= 0.15;
-    btnNo.style.transform = `scale(${Math.max(scaleNo, 0.2)})`;
-    btnNo.style.position = 'fixed';
-    btnNo.style.top = Math.random() * 80 + 10 + '%';
-    btnNo.style.left = Math.random() * 80 + 10 + '%';
+// 4. BOTONES (Tu lógica original)
+document.getElementById('btnNo').addEventListener('click', function() {
+    const musica = document.getElementById('musica');
+    if (musica) musica.play().catch(() => {}); // Intentar play aquí también
+    
+    this.style.position = 'fixed';
+    this.style.top = Math.random() * 80 + 10 + '%';
+    this.style.left = Math.random() * 80 + 10 + '%';
 });
 
-const btnPoquito = document.getElementById('btnPoquito');
-btnPoquito.addEventListener('mouseenter', () => {
-    btnPoquito.style.position = 'fixed';
-    btnPoquito.style.top = Math.random() * 80 + 10 + '%';
-    btnPoquito.style.left = Math.random() * 80 + 10 + '%';
+document.getElementById('btnPoquito').addEventListener('mouseenter', function() {
+    this.style.position = 'fixed';
+    this.style.top = Math.random() * 80 + 10 + '%';
+    this.style.left = Math.random() * 80 + 10 + '%';
 });
 
+// 5. JARDÍN (Ajustado para que no se amontone como pediste)
 function generarJardin() {
     const jardin = document.getElementById('jardin');
+    if(!jardin) return;
+    jardin.innerHTML = '';
     const flores = ['Gerbera1.png', 'Gerbera2.png', 'Gerbera3.png', 'Gerbera_Art.png'];
-    for(let i=0; i<15; i++) {
+    for(let i=0; i<12; i++) {
         const img = document.createElement('img');
         img.src = `img/${flores[i % 4]}`;
         img.className = 'flor-brotando';
-        img.style.left = Math.random() * 95 + '%';
+        img.style.left = (i * 8) + 5 + '%'; // Separación fija
         img.style.animationDelay = (i * 0.1) + 's';
         jardin.appendChild(img);
     }
@@ -73,15 +81,19 @@ function iniciarTransicion() {
     irA('pantalla4');
     setTimeout(() => {
         irA('pantalla5');
-        document.getElementById('pantalla5').style.display = 'block';
         generarCartas();
     }, 5000);
 }
 
 function generarCartas() {
     const container = document.getElementById('mosaico-container');
+    if(!container) return;
     container.innerHTML = '';
-    razones.forEach((texto) => {
+    
+    // Shuffle simple antes de crear sobres
+    const razonesMezcladas = [...razones].sort(() => Math.random() - 0.5);
+
+    razonesMezcladas.forEach((texto) => {
         const div = document.createElement('div');
         div.className = 'sobre';
         div.innerHTML = '✉️';
@@ -98,11 +110,10 @@ function generarCartas() {
 }
 
 function celebrar() {
-    const duracion = 10 * 1000;
-    const final = Date.now() + duracion;
+    const final = Date.now() + 10000;
     (function frame() {
-        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#e4007c', '#ffdeeb'] });
-        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#e4007c', '#ffdeeb'] });
+        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#e4007c', '#ffffff'] });
+        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#e4007c', '#ffffff'] });
         if (Date.now() < final) requestAnimationFrame(frame);
     }());
 }

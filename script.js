@@ -1,24 +1,23 @@
-const misFotosDeCarga = ['Foto', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg']; // Pon tus fotos reales
-const razones = [
-    "Tus ojos cafes.",
-    "Tu cabello.",
-    "Tu hermosa sonrisa.",
-    "Tus ricos labios.",
-    "Tu inteligencia.",
-    "Tu forma de ser.",
-    "La manera en la que piensas.",
-    "Tu risa preciosa",
-    "Tu amabilidad.",
+// CONFIGURACIÓN
+const misFotosDeCarga = ['Foto', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg']; // FOTOS DEL LOADER
+const razonesOriginales = [
+    "Me encanta tu sonrisa al despertar.",
+    "Amo cómo te brillan los ojos cuando hablas de código.",
+    "Eres mi mejor debug en los días difíciles.",
+    "Cada momento contigo es mi parte favorita del día.",
+    "Adoro la forma en que me miras sin decir nada.",
     // RELLENA LAS 100 AQUÍ
 ];
 
+// Shuffle: Mezcla las razones al azar cada vez que entra
+const razones = [...razonesOriginales].sort(() => Math.random() - 0.5);
+
 let cartasAbiertas = 0;
 
-// Shuffle: Reuelve las razones al azar
-const razonesMezcladas = [...razones].sort(() => Math.random() - 0.5);
-
-window.onload = () => {
+// FIX: Usamos DOMContentLoaded para que el timer inicie sin esperar a las fotos pesadas
+document.addEventListener('DOMContentLoaded', () => {
     const stack = document.getElementById('photo-stack');
+    
     misFotosDeCarga.forEach((foto, i) => {
         const img = document.createElement('img');
         img.src = `img/${foto}`;
@@ -27,19 +26,22 @@ window.onload = () => {
         stack.appendChild(img);
     });
 
-    // Mostrar botón de entrar después de 5 segundos
+    // Forzamos aparición del botón a los 5 segundos
     setTimeout(() => {
-        document.getElementById('loader-status').innerText = "¡Listo para ti!";
-        document.getElementById('btn-entrar').style.display = "block";
-    }, 5000);
-};
+        const status = document.getElementById('loader-status');
+        if(status) status.innerText = "¡Listo para mi princesa!";
+        
+        const btn = document.getElementById('btn-entrar');
+        if(btn) btn.style.display = "block";
+    }, 5000); 
+});
 
 function comenzarSorpresa() {
     const loader = document.getElementById('loader');
     loader.style.opacity = '0';
     setTimeout(() => loader.remove(), 1000);
     
-    // Música con Fade-in
+    // Música con Fade-in al 50%
     const musica = document.getElementById('musica');
     musica.volume = 0;
     musica.play();
@@ -47,11 +49,11 @@ function comenzarSorpresa() {
     const interval = setInterval(() => {
         if (vol < 0.5) {
             vol += 0.05;
-            musica.volume = vol;
+            musica.volume = Math.min(vol, 0.5);
         } else {
             clearInterval(interval);
         }
-    }, 200); // Sube el volumen gradualmente
+    }, 250); 
 }
 
 function irA(id) {
@@ -64,29 +66,30 @@ function irA(id) {
 const btnNo = document.getElementById('btnNo');
 btnNo.addEventListener('click', () => {
     btnNo.style.position = 'fixed';
-    btnNo.style.top = Math.random() * 80 + 10 + '%';
-    btnNo.style.left = Math.random() * 80 + 10 + '%';
+    btnNo.style.top = Math.random() * 70 + 15 + '%';
+    btnNo.style.left = Math.random() * 70 + 15 + '%';
 });
 
 const btnPoquito = document.getElementById('btnPoquito');
 btnPoquito.addEventListener('mouseenter', () => {
     btnPoquito.style.position = 'fixed';
-    btnPoquito.style.top = Math.random() * 80 + 10 + '%';
-    btnPoquito.style.left = Math.random() * 80 + 10 + '%';
+    btnPoquito.style.top = Math.random() * 70 + 15 + '%';
+    btnPoquito.style.left = Math.random() * 70 + 15 + '%';
 });
 
 function generarJardin() {
     const jardin = document.getElementById('jardin');
     jardin.innerHTML = '';
     const flores = ['Gerbera1.png', 'Gerbera2.png', 'Gerbera3.png', 'Gerbera_Art.png'];
-    const totalFlores = 12;
+    const totalFlores = 12; // Cantidad de gerberas fijas
+    
     for(let i=0; i < totalFlores; i++) {
         const img = document.createElement('img');
         img.src = `img/${flores[i % 4]}`;
         img.className = 'flor-brotando';
-        // Separación uniforme:
-        img.style.left = (i * (100 / (totalFlores - 1)) * 0.9) + 5 + '%';
-        img.style.animationDelay = (i * 0.15) + 's';
+        // Posicionamiento uniforme para que no se amontonen
+        img.style.left = (i * (90 / (totalFlores - 1))) + 5 + '%';
+        img.style.animationDelay = (i * 0.2) + 's';
         jardin.appendChild(img);
     }
 }
@@ -103,7 +106,7 @@ function iniciarTransicion() {
 function generarCartas() {
     const container = document.getElementById('mosaico-container');
     container.innerHTML = '';
-    razonesMezcladas.forEach((texto) => {
+    razones.forEach((texto) => {
         const div = document.createElement('div');
         div.className = 'sobre';
         div.innerHTML = '✉️';
@@ -122,8 +125,8 @@ function generarCartas() {
 function celebrar() {
     const end = Date.now() + 10000;
     (function frame() {
-        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#e4007c', '#ffffff'] });
-        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#e4007c', '#ffffff'] });
+        confetti({ particleCount: 6, angle: 60, spread: 60, origin: { x: 0 }, colors: ['#e4007c', '#ffffff', '#ffb6c1'] });
+        confetti({ particleCount: 6, angle: 120, spread: 60, origin: { x: 1 }, colors: ['#e4007c', '#ffffff', '#ffb6c1'] });
         if (Date.now() < end) requestAnimationFrame(frame);
     }());
 }

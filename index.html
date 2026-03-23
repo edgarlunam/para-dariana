@@ -11,19 +11,19 @@
 
     <div id="loader">
         <div id="photo-stack"></div>
-        <div class="loader-text">
-            <h2>Preparando algo especial...</h2>
-            <div class="heart-loader"></div>
+        <div class="loader-content">
+            <h2 id="loader-status">Preparando algo especial...</h2>
+            <button id="btn-entrar" style="display: none;" onclick="comenzarSorpresa()">Entrar ❤️</button>
         </div>
     </div>
 
     <audio id="musica" loop>
-        <source src="img/Musica.mp3" type="audio/mpeg">
+        <source src="img/musica.mp3" type="audio/mpeg">
     </audio>
 
     <section id="pantalla1" class="active">
         <div class="content">
-            <h1>¿Me amas mucho?</h1>
+            <h1 class="titulo">¿Me amas mucho?</h1>
             <div class="btn-container">
                 <button class="btn-gerbera" onclick="irA('pantalla2')">SÍ</button>
                 <button id="btnNo" class="btn-gerbera">NO</button>
@@ -33,7 +33,7 @@
 
     <section id="pantalla2">
         <div class="content">
-            <h1>¿Mucho o poquito?</h1>
+            <h1 class="titulo">¿Mucho o poquito?</h1>
             <div class="btn-container">
                 <button class="btn-gerbera" onclick="irA('pantalla3')">Muchotototote</button>
                 <button id="btnPoquito" class="btn-gerbera">Poquito</button>
@@ -43,10 +43,10 @@
 
     <section id="pantalla3">
         <div class="content">
-            <h1>¿Qué desea saber mi princesa?</h1>
+            <h1 class="titulo">¿Qué desea saber mi princesa?</h1>
             <div class="btn-main-container">
-                <button class="btn-rect" onclick="iniciarTransicion()">3 cosas que me gustan de ti</button>
-                <div class="btn-meta-wrapper">
+                <button class="btn-rect principal" onclick="iniciarTransicion()">3 cosas que me gustan de ti</button>
+                <div class="meta-container">
                     <button class="btn-rect disabled">Mis metas contigo...</button>
                     <span class="proximamente">disponible próximamente...</span>
                 </div>
@@ -57,14 +57,14 @@
 
     <section id="pantalla4">
         <div class="content">
-            <h1 class="texto-grande">¿De verdad creíste que solo serían 3 cosas?</h1>
+            <h1 class="titulo grande sombra">¿De verdad creíste que solo serían 3 cosas?</h1>
         </div>
     </section>
 
     <section id="pantalla5">
         <div id="contador-flotante">0 / 100</div>
         <div class="header-mosaico">
-            <h1>100 cosas que me encantan de ti</h1>
+            <h1 class="titulo">100 cosas que me encantan de ti</h1>
         </div>
         <div id="mosaico-container"></div>
     </section>

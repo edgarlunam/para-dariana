@@ -1,188 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Dosis:wght@400;700&display=swap');
 
 :root {
     --rosa-mexicano: #e4007c;
-    --rosa-pastel: #ffdeeb;
+    --sombra-texto: 2px 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Quicksand', sans-serif;
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Dosis', sans-serif;
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="%23e4007c" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
 }
 
-body {
-    background: #000;
-    overflow-x: hidden;
+body { background: #000; overflow-x: hidden; }
+
+.titulo { 
+    font-family: 'Pacifico', cursive; 
+    font-size: 3.5rem; 
+    text-shadow: var(--sombra-texto);
+    margin-bottom: 20px;
 }
 
-/* Pantalla de Carga */
+.titulo.grande { font-size: 4.5rem; }
+
+/* Loader */
 #loader {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: white;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1s ease;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #fff; z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 
-#photo-stack {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin-bottom: 50px;
-}
+#photo-stack { position: relative; width: 300px; height: 300px; margin-bottom: 50px; }
 
 #photo-stack img {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border: 10px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute; width: 220px; height: 220px; object-fit: cover;
+    border: 8px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: #f0f0f0;
 }
 
-/* Transiciones de Pantalla */
+#btn-entrar {
+    padding: 15px 45px; font-size: 1.6rem; background: var(--rosa-mexicano);
+    color: white; border: none; border-radius: 50px; font-family: 'Pacifico', cursive;
+    box-shadow: 0 5px 15px rgba(228, 0, 124, 0.4); margin-top: 20px; transition: 0.3s;
+}
+
+/* Pantallas */
 section {
-    display: none;
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    opacity: 0;
-    transition: opacity 0.8s ease-in-out;
+    display: none; height: 100vh; width: 100%; background-size: cover; background-position: center;
+    flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    color: white; opacity: 0; transition: opacity 0.8s ease-in-out; position: relative;
 }
 
-section.active {
-    display: flex;
-    opacity: 1;
-}
+section.active { display: flex; opacity: 1; }
 
-/* Fondos */
 #pantalla1, #pantalla2 { background-image: url('img/Fondo1.jpg'); }
-#pantalla3, #pantalla4 { background-image: url('img/Fondo2.jpg'); }
-#pantalla5 { 
-    background-image: url('img/Fondo3.jpg'); 
-    background-attachment: fixed;
-    height: auto; min-height: 100vh;
-    padding-top: 50px;
-}
+#pantalla3, #pantalla4 { background-image: url('img/Fondo2.jpg'); background-size: cover; }
+#pantalla5 { background-image: url('img/Fondo3.jpg'); background-attachment: fixed; height: auto; min-height: 100vh; padding: 60px 20px; }
 
-/* MARCO PERSONALIZABLE (Pantalla 3 y 4) */
+/* Marco */
 #pantalla3::after, #pantalla4::after {
-    content: "";
-    background-image: url('img/Marco.png');
-    background-size: contain;
-    background-repeat: repeat-x;
-    background-position: bottom;
-    position: absolute;
-    bottom: 0; left: 0; width: 100%;
-    height: 150px; /* AJUSTA AQUÍ EL TAMAÑO DEL MARCO */
-    z-index: 5;
-    pointer-events: none;
+    content: ""; background-image: url('img/Marco.png'); background-size: contain;
+    background-repeat: repeat-x; background-position: bottom;
+    position: absolute; bottom: 0; width: 100%; height: 200px; z-index: 5;
 }
 
 /* Botones Gerbera */
 .btn-gerbera {
-    background-image: url('img/Gerbera2.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
-    border: none;
-    width: 160px; height: 160px;
-    color: white; font-weight: bold;
-    text-shadow: 1px 1px 3px black;
-    font-size: 1.1rem;
-    transition: transform 0.2s;
+    background-image: url('img/Gerbera2.png'); background-size: contain; background-repeat: no-repeat;
+    background-position: center; background-color: transparent; border: none;
+    width: 200px; height: 200px; color: white; font-weight: bold;
+    font-size: 1.5rem; text-shadow: 2px 2px 5px black; transition: 0.4s;
 }
 
-.btn-rect {
-    background: var(--rosa-mexicano);
-    color: white;
-    padding: 15px 30px;
-    border: 2px solid white;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin: 10px;
+.btn-gerbera:hover {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
 }
 
-.btn-rect.disabled { background: #666; opacity: 0.7; }
+/* Centrado Pantalla 3 */
+.btn-main-container { display: flex; flex-direction: column; align-items: center; gap: 25px; }
+.btn-rect { background: var(--rosa-mexicano); color: white; padding: 18px 40px; border: 2px solid white; border-radius: 15px; font-weight: bold; font-size: 1.3rem; }
+.btn-rect.disabled { background: #777; opacity: 0.8; }
+.proximamente { color: #fff; font-weight: bold; text-shadow: var(--sombra-texto); display: block; margin-top: 8px; font-size: 1.1rem; }
 
-/* Mosaico y Cartas Realistas */
-#mosaico-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 25px;
-    padding: 40px;
-    max-width: 1200px;
-}
+/* Sobres Transparentes */
+#mosaico-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
 
 .sobre {
-    background: var(--rosa-pastel);
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    border: 2px solid white;
-    font-size: 2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    background: rgba(255, 222, 235, 0.75); /* Transparencia solicitada */
+    height: 150px; border-radius: 18px; border: 2px solid white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.25); transition: 0.3s;
 }
 
 .hoja {
-    background: #fff;
-    color: #444;
-    padding: 15px;
-    border-radius: 5px;
-    min-height: 120px;
-    font-size: 0.95rem; /* Tamaño texto dentro de carta */
-    line-height: 1.4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-    animation: fadeIn 0.5s;
+    background: white; color: #333; padding: 25px; border-radius: 12px;
+    min-height: 150px; font-size: 1.4rem; font-weight: 700; 
+    display: flex; align-items: center; justify-content: center;
+    animation: fadeIn 0.6s; line-height: 1.3; text-align: center;
 }
 
-/* Contador */
 #contador-flotante {
-    position: fixed;
-    top: 20px; right: 20px;
-    background: var(--rosa-mexicano);
-    padding: 10px 20px;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    z-index: 100;
+    position: fixed; top: 25px; right: 25px; background: var(--rosa-mexicano);
+    padding: 12px 30px; border-radius: 40px; font-weight: bold; z-index: 100; font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* Jardín */
-.flor-brotando {
-    height: 80px;
-    position: absolute;
-    bottom: 20px;
-    animation: brotar 1s ease-out forwards;
-}
+.flor-brotando { height: 110px; position: absolute; bottom: 25px; z-index: 6; }
 
-@keyframes brotar { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-/* Responsivo para Laptop/Tablet */
-@media (max-width: 1024px) {
-    #mosaico-container { grid-template-columns: repeat(3, 1fr); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

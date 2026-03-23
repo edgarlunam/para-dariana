@@ -1,16 +1,15 @@
 // 1. CONFIGURACIÓN
 const misFotosDeCarga = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
-
 const razones = [
     "Me encanta tu sonrisa al despertar.",
     "Amo cómo te brillan los ojos cuando hablas de código.",
     "Eres mi mejor debug en los días difíciles.",
-    // RELLENA AQUÍ TODAS LAS DEMÁS
+    // AGREGA AQUÍ LAS DEMÁS
 ];
 
 let cartasAbiertas = 0;
 
-// 2. CARGA (Tu lógica original de 5 segundos)
+// 2. LOADER
 window.onload = () => {
     const stack = document.getElementById('photo-stack');
     misFotosDeCarga.forEach((foto, i) => {
@@ -30,14 +29,25 @@ window.onload = () => {
     }, 5000);
 };
 
-// 3. MÚSICA Y NAVEGACIÓN (Copiado de tu versión funcional)
+// 3. FUNCIÓN DE NAVEGACIÓN Y MÚSICA (REFORZADA)
 function irA(id) {
+    // Intento de reproducción directa
     const musica = document.getElementById('musica');
-    // Si existe el elemento, darle play directo. Sin fade-in, sin vueltas.
     if (musica) {
-        musica.play().catch(e => console.log("Clic necesario"));
+        // Forzamos el volumen y el play
+        musica.volume = 0.5;
+        const playPromise = musica.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log("Música iniciada correctamente");
+            }).catch(error => {
+                console.log("El navegador bloqueó el inicio automático, intentando en el siguiente clic.");
+            });
+        }
     }
     
+    // Cambio de pantalla
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     const proxima = document.getElementById(id);
     if (proxima) proxima.classList.add('active');
@@ -45,10 +55,11 @@ function irA(id) {
     if(id === 'pantalla3') generarJardin();
 }
 
-// 4. BOTONES (Tu lógica original)
+// 4. BOTONES JUGUETONES
+// Agregamos un listener de respaldo para asegurar que la música suene al tocar el botón "NO"
 document.getElementById('btnNo').addEventListener('click', function() {
     const musica = document.getElementById('musica');
-    if (musica) musica.play().catch(() => {}); // Intentar play aquí también
+    if(musica) musica.play();
     
     this.style.position = 'fixed';
     this.style.top = Math.random() * 80 + 10 + '%';
@@ -61,7 +72,7 @@ document.getElementById('btnPoquito').addEventListener('mouseenter', function() 
     this.style.left = Math.random() * 80 + 10 + '%';
 });
 
-// 5. JARDÍN (Ajustado para que no se amontone como pediste)
+// 5. JARDÍN Y CARTAS
 function generarJardin() {
     const jardin = document.getElementById('jardin');
     if(!jardin) return;
@@ -71,7 +82,7 @@ function generarJardin() {
         const img = document.createElement('img');
         img.src = `img/${flores[i % 4]}`;
         img.className = 'flor-brotando';
-        img.style.left = (i * 8) + 5 + '%'; // Separación fija
+        img.style.left = (i * 8) + 5 + '%';
         img.style.animationDelay = (i * 0.1) + 's';
         jardin.appendChild(img);
     }
@@ -89,8 +100,6 @@ function generarCartas() {
     const container = document.getElementById('mosaico-container');
     if(!container) return;
     container.innerHTML = '';
-    
-    // Shuffle simple antes de crear sobres
     const razonesMezcladas = [...razones].sort(() => Math.random() - 0.5);
 
     razonesMezcladas.forEach((texto) => {

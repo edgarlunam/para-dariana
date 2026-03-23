@@ -27,26 +27,33 @@ window.onload = () => {
         loader.style.opacity = '0';
         setTimeout(() => {
             loader.remove();
-            // Iniciamos música con fade-in al terminar el loader
-            iniciarMusica();
+            // Eliminamos iniciarMusica de aquí porque el navegador lo bloquea
         }, 1000);
     }, 5000);
 };
 
 function iniciarMusica() {
     const musica = document.getElementById('musica');
-    musica.volume = 0;
-    musica.play().catch(() => console.log("Autoplay bloqueado, esperando clic"));
-    let vol = 0;
-    const interval = setInterval(() => {
-        if (vol < 0.5) {
-            vol += 0.05;
-            musica.volume = Math.min(vol, 0.5);
-        } else { clearInterval(interval); }
-    }, 300);
+    // Solo intentamos reproducir si no está sonando ya
+    if (musica.paused) {
+        musica.volume = 0;
+        musica.play().then(() => {
+            let vol = 0;
+            const interval = setInterval(() => {
+                if (vol < 0.5) {
+                    vol += 0.05;
+                    musica.volume = Math.min(vol, 0.5);
+                } else { clearInterval(interval); }
+            }, 300);
+        }).catch(err => console.log("Esperando interacción..."));
+    }
 }
 
 function irA(id) {
+    // CORRECCIÓN: Al hacer clic en cualquier botón para cambiar de pantalla,
+    // el navegador ya nos permite activar el sonido.
+    iniciarMusica();
+
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     if(id === 'pantalla3') generarJardin();
@@ -54,6 +61,8 @@ function irA(id) {
 
 // Botones juguetones
 document.getElementById('btnNo').addEventListener('click', function() {
+    // También iniciamos música aquí por si interactúa con este botón primero
+    iniciarMusica();
     this.style.position = 'fixed';
     this.style.top = Math.random() * 80 + 10 + '%';
     this.style.left = Math.random() * 80 + 10 + '%';

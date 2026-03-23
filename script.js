@@ -6,11 +6,9 @@ const razonesOriginales = [
     // AGREGA AQUÍ LAS DEMÁS
 ];
 
-// Shuffle: Revolvemos las razones
 const razones = [...razonesOriginales].sort(() => Math.random() - 0.5);
 let cartasAbiertas = 0;
 
-// Lógica de carga original con "Seguro" de 5 segundos
 window.onload = () => {
     const stack = document.getElementById('photo-stack');
     misFotosDeCarga.forEach((foto, i) => {
@@ -21,38 +19,39 @@ window.onload = () => {
         stack.appendChild(img);
     });
 
-    // Se quita solo a los 5 segundos (Tu diseño original)
     setTimeout(() => {
         const loader = document.getElementById('loader');
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.remove();
-        }, 1000);
+        if(loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.remove(), 1000);
+        }
     }, 5000);
 };
 
-// Función simple de reproducción
-function reproducirMusica() {
-    const musica = document.getElementById('musica');
-    if (musica.paused) {
-        musica.volume = 0.5; // Iniciamos directo al 50% como pediste
-        musica.play().catch(error => console.log("Esperando clic para sonar"));
-    }
-}
-
+// FUNCIÓN DE MÚSICA CORREGIDA
 function irA(id) {
-    // Al hacer clic en cualquier botón, se activa la música sin rodeos
-    reproducirMusica();
+    // Intentar reproducir la música CADA VEZ que se cambia de pantalla.
+    // Una vez que empiece a sonar, las siguientes llamadas no harán nada (porque ya estará sonando).
+    const musica = document.getElementById('musica');
+    if (musica) {
+        musica.volume = 0.5;
+        musica.play().catch(error => {
+            console.log("El navegador bloqueó el audio, intentando de nuevo en el siguiente clic...");
+        });
+    }
 
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    const proximaPantalla = document.getElementById(id);
+    if(proximaPantalla) proximaPantalla.classList.add('active');
     
     if(id === 'pantalla3') generarJardin();
 }
 
-// Botones juguetones
 document.getElementById('btnNo').addEventListener('click', function() {
-    reproducirMusica(); // También aquí por si acaso
+    // También intentamos aquí por si acaso
+    const musica = document.getElementById('musica');
+    if(musica) musica.play().catch(() => {});
+
     this.style.position = 'fixed';
     this.style.top = Math.random() * 80 + 10 + '%';
     this.style.left = Math.random() * 80 + 10 + '%';
@@ -66,6 +65,7 @@ document.getElementById('btnPoquito').addEventListener('mouseenter', function() 
 
 function generarJardin() {
     const jardin = document.getElementById('jardin');
+    if(!jardin) return;
     jardin.innerHTML = '';
     const flores = ['Gerbera1.png', 'Gerbera2.png', 'Gerbera3.png', 'Gerbera_Art.png'];
     const total = 12;
@@ -89,6 +89,7 @@ function iniciarTransicion() {
 
 function generarCartas() {
     const container = document.getElementById('mosaico-container');
+    if(!container) return;
     container.innerHTML = '';
     razones.forEach((texto) => {
         const div = document.createElement('div');
@@ -99,7 +100,8 @@ function generarCartas() {
             this.innerHTML = texto;
             this.onclick = null;
             cartasAbiertas++;
-            document.getElementById('contador-flotante').innerText = `${cartasAbiertas} / ${razonesOriginales.length}`;
+            const contador = document.getElementById('contador-flotante');
+            if(contador) contador.innerText = `${cartasAbiertas} / ${razonesOriginales.length}`;
             if(cartasAbiertas === razonesOriginales.length) celebrar();
         };
         container.appendChild(div);

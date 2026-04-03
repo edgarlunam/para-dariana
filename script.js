@@ -4,15 +4,15 @@ const razones = [
     "Tu inteligencia", "Tu forma de ser", "La manera en la que piensas", "Tu risa",
     "Tu amabilidad", "Tus pestañas", "Tus hermosos cachetitos", "Tu amor",
     "Tus abrazos", "Tus besos", "Tu honestidad", "Tu lealtad",
-    "La forma en que me apoyas", "Tu voz", "Lo linda que te ves", "Tu mejora constante",
+    "La forma en que me apoyas", "Tu voz (ojala seguir escuchandola toda la vida)", "Lo linda que te ves", "Tu mejora constante",
     "Tu comprension", "Tu humildad", "Tu caracter", "Tu forma de querer a las personas",
     "Tu forma de mirarme", "La manera en la que me amas", "Como te vistes", "Lo sensible que eres",
     "Tus enojos, te amo mi berrinchuda", "Tu sentido del humor", "Tu pasion por hacer las cosas", "Tu olor",
-    "Tu sonrisa cada que me miras", "Que no te gusta dejarme solo", "Tu seguridad", "Tu interes",
-    "Tus regaños", "Tus mordidas", "Las caricias", "Tu seguridad por lo que quieres",
+    "Tu sonrisa cada que me miras (porfa no dejes de hacerlo)", "Que no te gusta dejarme solo", "Tu seguridad", "Tu interes",
+    "Tus regaños", "Tus mordidas", "Las caricias que haces en mi cabello y orejas. ah y espalda", "Tu seguridad por lo que quieres",
     "Tus celos", "Tus caras", "Tu comedia", "Tu bella piel",
     "Tu alegria", "Tu risa contagiosa", "Tu actuar", "Tu perspectiva de todo",
-    "Tu amor por los paisajes", "Tu amor por tus tierras", "Tu belleza incomparable", "Tu apoyo",
+    "Tu amor por los paisajes, que por cierto tu eres el mas hermoso que existe", "Tu amor por tus tierras", "Tu belleza incomparable", "Tu apoyo",
     "Tu sencillez", "Tu precioso cuerpo", "Tu cariño", "Tus detalles",
     "Tu fortaleza", "Lo orgullosa que eres", "Todo para mi"
 ];
@@ -55,24 +55,17 @@ function irA(id) {
     if(id === 'pantalla3') generarJardin();
 }
 
-// Lógica de botones que escapan
-const btnNo = document.getElementById('btnNo');
-if(btnNo) {
-    btnNo.addEventListener('click', function() {
-        this.style.position = 'fixed';
-        this.style.top = Math.random() * 80 + 10 + '%';
-        this.style.left = Math.random() * 80 + 10 + '%';
-    });
-}
+document.getElementById('btnNo').addEventListener('click', function() {
+    this.style.position = 'fixed';
+    this.style.top = Math.random() * 80 + 10 + '%';
+    this.style.left = Math.random() * 80 + 10 + '%';
+});
 
-const btnPoquito = document.getElementById('btnPoquito');
-if(btnPoquito) {
-    btnPoquito.addEventListener('mouseenter', function() {
-        this.style.position = 'fixed';
-        this.style.top = Math.random() * 80 + 10 + '%';
-        this.style.left = Math.random() * 80 + 10 + '%';
-    });
-}
+document.getElementById('btnPoquito').addEventListener('mouseenter', function() {
+    this.style.position = 'fixed';
+    this.style.top = Math.random() * 80 + 10 + '%';
+    this.style.left = Math.random() * 80 + 10 + '%';
+});
 
 function generarJardin() {
     const jardin = document.getElementById('jardin');
@@ -93,7 +86,7 @@ function iniciarTransicion() {
     setTimeout(() => {
         irA('pantalla5');
         generarCartas();
-    }, 4000);
+    }, 5000);
 }
 
 function generarCartas() {
@@ -119,5 +112,5 @@ function generarCartas() {
 }
 
 function celebrar() {
-    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
 }

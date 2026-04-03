@@ -12,16 +12,11 @@
 
 body { font-family: 'Dosis', sans-serif; background: #000; overflow-x: hidden; }
 
-/* Tipografías solicitadas */
-.titulo { 
-    font-family: 'Pacifico', cursive; 
-    font-size: 3.5rem; 
-    text-shadow: var(--sombra-texto);
-    color: white;
-}
+/* Títulos */
+.titulo { font-family: 'Pacifico', cursive; font-size: 3.5rem; text-shadow: var(--sombra-texto); color: white; }
 .titulo.grande { font-size: 5rem; }
 
-/* Loader (Regreso a tu diseño original) */
+/* Loader */
 #loader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: white; z-index: 2000; display: flex; flex-direction: column; 
@@ -35,7 +30,7 @@ body { font-family: 'Dosis', sans-serif; background: #000; overflow-x: hidden; }
 }
 .titulo-loader { font-family: 'Dosis'; color: #333; margin-top: 20px; }
 
-/* Secciones y Fondos */
+/* Secciones */
 section {
     display: none; height: 100vh; width: 100%; background-size: cover; background-position: center;
     flex-direction: column; align-items: center; justify-content: center; text-align: center;
@@ -43,45 +38,54 @@ section {
 }
 section.active { display: flex; opacity: 1; }
 
+#pantalla-bienvenida { background: radial-gradient(circle, #fff5f8 0%, #ffdeeb 100%); }
 #pantalla1, #pantalla2 { background-image: url('img/Fondo1.jpg'); }
 #pantalla3, #pantalla4 { background-image: url('img/Fondo2.jpg'); }
 #pantalla5 { background-image: url('img/Fondo3.jpg'); background-attachment: fixed; height: auto; min-height: 100vh; padding: 50px 0; }
 
-/* Marco y Gerbera Brillo */
-#pantalla3::after, #pantalla4::after {
-    content: ""; background-image: url('img/Marco.png'); background-size: contain;
-    background-repeat: repeat-x; background-position: bottom;
-    position: absolute; bottom: 0; width: 100%; height: 200px; z-index: 5;
+/* NUEVOS ESTILOS BIENVENIDA */
+.titulo-cumple { font-family: 'Pacifico', cursive; color: var(--rosa-mexicano); font-size: 2.5rem; margin-bottom: 30px; }
+.carta-polaroid-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; max-width: 900px; }
+
+.carta-escrita {
+    background: #fffef0; padding: 30px; width: 380px; min-height: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 2px;
+    font-size: 1.2rem; color: #333; z-index: 10; display: flex; flex-direction: column; justify-content: space-between;
 }
 
+.polaroid { position: absolute; background: white; padding: 10px 10px 30px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); width: 140px; }
+.polaroid img { width: 100%; height: 110px; object-fit: cover; }
+.polaroid p { font-family: 'Pacifico', cursive; font-size: 0.8rem; margin-top: 10px; color: #333; }
+
+.p1 { top: -30px; left: -150px; transform: rotate(-15deg); }
+.p2 { top: -30px; right: -150px; transform: rotate(15deg); }
+.p3 { bottom: -10px; left: -160px; transform: rotate(-10deg); }
+.p4 { bottom: -10px; right: -160px; transform: rotate(10deg); }
+
+.btn-bienvenida {
+    background: var(--rosa-mexicano); color: white; border: 2px solid white; padding: 10px 25px;
+    border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; align-self: center;
+}
+.btn-bienvenida:hover { transform: scale(1.1); }
+
+/* Botones y Otros */
 .btn-gerbera {
     background-image: url('img/Gerbera2.png'); background-size: contain; background-repeat: no-repeat;
     background-position: center; background-color: transparent; border: none;
-    width: 190px; height: 190px; color: white; font-weight: bold; font-family: 'Dosis';
-    font-size: 1.5rem; text-shadow: 2px 2px 4px black; transition: 0.3s;
+    width: 190px; height: 190px; color: white; font-weight: bold; font-size: 1.5rem; text-shadow: 2px 2px 4px black; transition: 0.3s;
 }
-.btn-gerbera:hover {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-}
+.btn-gerbera:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); }
 
-/* Pantalla 3 Centrada y Sombreada */
-.btn-main-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.btn-rect { background: var(--rosa-mexicano); color: white; padding: 15px 35px; border: 2px solid white; border-radius: 12px; font-weight: bold; font-size: 1.2rem; }
-.proximamente { color: white; font-weight: bold; text-shadow: var(--sombra-texto); margin-top: 5px; display: block; }
+.btn-rect { background: var(--rosa-mexicano); color: white; padding: 15px 35px; border: 2px solid white; border-radius: 12px; font-weight: bold; font-size: 1.2rem; cursor: pointer; }
 
-/* Sobres Transparentes y Cartas Grandes */
 #mosaico-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; }
-.sobre {
-    background: rgba(255, 222, 235, 0.7); /* Transparencia */
-    height: 140px; border-radius: 15px; border: 2px solid white;
-    display: flex; align-items: center; justify-content: center; font-size: 3.5rem; transition: 0.3s;
-}
-.hoja {
-    background: white; color: #333; padding: 20px; border-radius: 10px;
-    min-height: 140px; font-size: 1.4rem; font-weight: bold; text-align: center;
-    display: flex; align-items: center; justify-content: center; line-height: 1.2;
-}
+.sobre { background: rgba(255, 222, 235, 0.7); height: 140px; border-radius: 15px; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; cursor: pointer; }
+.hoja { background: white; color: #333; padding: 20px; border-radius: 10px; min-height: 140px; font-size: 1.4rem; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; }
 
 #contador-flotante { position: fixed; top: 20px; right: 20px; background: var(--rosa-mexicano); padding: 10px 20px; border-radius: 20px; color: white; font-weight: bold; z-index: 100; }
 .flor-brotando { height: 100px; position: absolute; bottom: 20px; z-index: 6; }
+
+@media (max-width: 768px) {
+    .polaroid { display: none; }
+    .carta-escrita { width: 90%; }
+}

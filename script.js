@@ -1,107 +1,21 @@
 // 1. CONFIGURACIÓN
 const misFotosDeCarga = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
 const razones = [
-    "Tus preciosos ojos cafes",
-    "Tu cabello",
-    "Tu hermosa sonrisa",
-    "Tus labios (muy ricos, por cierto)",
-    "Tu inteligencia",
-    "Tu forma de ser",
-    "La manera en la que piensas",
-    "Tu risa",
-    "Tu amabilidad",
-    "Tus pestañas",
-    "Tus hermosos cachetitos",
-    "Tu amor",
-    "Tus abrazos",
-    "Tus besos",
-    "Tu honestidad",
-    "Tu lealtad",
-    "La forma en que me apoyas",
-    "Tu voz (ojala seguir escuchandola toda la vida)",
-    "Lo linda que te ves",
-    "Tu mejora constante",
-    "Tu comprension",
-    "Tu humildad",
-    "Tu caracter",
-    "Tu forma de querer a las personas",
-    "Tu forma de mirarme",
-    "La manera en la que me amas",
-    "Como te vistes",
-    "Lo sensible que eres",
-    "Tus enojos, te amo mi berrinchuda",
-    "Tu sentido del humor",
-    "Tu pasion por hacer las cosas",
-    "Tu olor",
-    "Tu sonrisa cada que me miras (porfa no dejes de hacerlo)",
-    "Que no te gusta dejarme solo",
-    "Tu seguridad",
-    "Tu interes",
-    "Tus regaños",
-    "Tus mordidas",
-    "Las caricias que haces en mi cabello y orejas. ah y espalda",
-    "Tu seguridad por lo que quieres",
-    "Tus celos",
-    "Tus caras",
-    "Tu comedia",
-    "Tu bella piel",
-    "Tu alegria",
-    "Tu risa contagiosa",
-    "Tu actuar",
-    "Tu perspectiva de todo",
-    "Tu amor por los paisajes, que por cierto tu eres el mas hermoso que existe",
-    "Tu amor por tus tierras",
-    "Tu belleza incomparable",
-    "Tu apoyo",
-    "Tu sencillez",
-    "Tu precioso cuerpo",
-    "Tu cariño",
-    "Tus chistes malos",
-    "Lo maravillosa que eres",
-    "Lo asombrosa que eres",
-    "Tu carisma",
-    "Tu amistad",
-    "Tu forma por ayudar a las personas",
-    "Tus dones",
-    "Tu confianza",
-    "Tus consejos",
-    "Tus regalos",
-    "Tus lunares",
-    "Has visto cosas en mi que nadie mas lo ha hecho",
-    "Que puedes llegar a actuar como mi segunda mama",
-    "Tus brazos",
-    "Tu encanto",
-    "Tu amor por los animales",
-    "Lo fuerte que eres",
-    "Tu enorme corazon",
-    "Tu atencion",
-    "Tu compañia",
-    "Tu resiliencia",
-    "Tu valentia",
-    "El toque que le das a mi vida",
-    "Tu calma",
-    "La forma en la que me hablas",
-    "Tu naris",
-    "Tus manos",
-    "Tu manera de escuchar",
-    "Tu carita",
-    "Tus valores",
-    "Tu belleza interna y exterior",
-    "Lo 4x4 que eres",
-    "Tus decisiones",
-    "Tu seriedad",
-    "No me juzgas",
-    "Tus piernas",
-    "Atenta",
-    "Tu manera de mejorar",
-    "La manera en que me guias",
-    "Tus cumplidos",
-    "Tu proyeccion en la vida",
-    "Tus detalles",
-    "Tu fortaleza",
-    "Lo orgullosa que eres",
-    "Todo para mi",
-    // AGREGA AQUÍ LAS DEMÁS
+    "Tus preciosos ojos cafes", "Tu cabello", "Tu hermosa sonrisa", "Tus labios (muy ricos, por cierto)",
+    "Tu inteligencia", "Tu forma de ser", "La manera en la que piensas", "Tu risa",
+    "Tu amabilidad", "Tus pestañas", "Tus hermosos cachetitos", "Tu amor",
+    "Tus abrazos", "Tus besos", "Tu honestidad", "Tu lealtad",
+    "La forma en que me apoyas", "Tu voz (ojala seguir escuchandola toda la vida)", "Lo linda que te ves", "Tu mejora constante",
+    "Tu comprension", "Tu humildad", "Tu caracter", "Tu forma de querer a las personas",
+    "Tu forma de mirarme", "La manera en la que me amas", "Como te vistes", "Lo sensible que eres",
+    "Tus enojos, te amo mi berrinchuda", "Tu sentido del humor", "Tu pasion por hacer las cosas", "Tu olor",
+    "Tu sonrisa cada que me miras (porfa no dejes de hacerlo)", "Que no te gusta dejarme solo", "Tu seguridad", "Tu interes",
+    "Tus regaños", "Tus mordidas", "Las caricias que haces en mi cabello y orejas. ah y espalda", "Tu seguridad por lo que quieres",
+    "Tus celos", "Tus caras", "Tu comedia", "Tu bella piel",
+    "Tu alegria", "Tu risa contagiosa", "Tu actuar", "Tu perspectiva de todo",
+    "Tu amor por los paisajes, que por cierto tu eres el mas hermoso que existe", "Tu amor por tus tierras", "Tu belleza incomparable", "Tu apoyo",
+    "Tu sencillez", "Tu precioso cuerpo", "Tu cariño", "Tus detalles",
+    "Tu fortaleza", "Lo orgullosa que eres", "Todo para mi"
 ];
 
 let cartasAbiertas = 0;
@@ -121,30 +35,23 @@ window.onload = () => {
         const loader = document.getElementById('loader');
         if(loader) {
             loader.style.opacity = '0';
-            setTimeout(() => loader.remove(), 1000);
+            setTimeout(() => {
+                loader.remove();
+                // Al terminar el loader, vamos a la Bienvenida
+                irA('pantalla-bienvenida');
+            }, 1000);
         }
     }, 5000);
 };
 
-// 3. FUNCIÓN DE NAVEGACIÓN Y MÚSICA (REFORZADA)
+// 3. FUNCIÓN DE NAVEGACIÓN Y MÚSICA
 function irA(id) {
-    // Intento de reproducción directa
     const musica = document.getElementById('musica');
     if (musica) {
-        // Forzamos el volumen y el play
         musica.volume = 0.5;
-        const playPromise = musica.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                console.log("Música iniciada correctamente");
-            }).catch(error => {
-                console.log("El navegador bloqueó el inicio automático, intentando en el siguiente clic.");
-            });
-        }
+        musica.play().catch(error => console.log("Audio bloqueado temporalmente"));
     }
     
-    // Cambio de pantalla
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     const proxima = document.getElementById(id);
     if (proxima) proxima.classList.add('active');
@@ -153,11 +60,9 @@ function irA(id) {
 }
 
 // 4. BOTONES JUGUETONES
-// Agregamos un listener de respaldo para asegurar que la música suene al tocar el botón "NO"
 document.getElementById('btnNo').addEventListener('click', function() {
     const musica = document.getElementById('musica');
     if(musica) musica.play();
-    
     this.style.position = 'fixed';
     this.style.top = Math.random() * 80 + 10 + '%';
     this.style.left = Math.random() * 80 + 10 + '%';

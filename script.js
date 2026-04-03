@@ -1,4 +1,3 @@
-// 1. CONFIGURACIÓN
 const misFotosDeCarga = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
 const razones = [
     "Tus preciosos ojos cafes", "Tu cabello", "Tu hermosa sonrisa", "Tus labios (muy ricos, por cierto)",
@@ -20,7 +19,6 @@ const razones = [
 
 let cartasAbiertas = 0;
 
-// 2. LOADER
 window.onload = () => {
     const stack = document.getElementById('photo-stack');
     misFotosDeCarga.forEach((foto, i) => {
@@ -37,19 +35,17 @@ window.onload = () => {
             loader.style.opacity = '0';
             setTimeout(() => {
                 loader.remove();
-                // Al terminar el loader, vamos a la Bienvenida
                 irA('pantalla-bienvenida');
             }, 1000);
         }
     }, 5000);
 };
 
-// 3. FUNCIÓN DE NAVEGACIÓN Y MÚSICA
 function irA(id) {
     const musica = document.getElementById('musica');
     if (musica) {
         musica.volume = 0.5;
-        musica.play().catch(error => console.log("Audio bloqueado temporalmente"));
+        musica.play().catch(error => console.log("Audio esperando interacción"));
     }
     
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -59,7 +55,6 @@ function irA(id) {
     if(id === 'pantalla3') generarJardin();
 }
 
-// 4. BOTONES JUGUETONES
 document.getElementById('btnNo').addEventListener('click', function() {
     const musica = document.getElementById('musica');
     if(musica) musica.play();
@@ -74,7 +69,6 @@ document.getElementById('btnPoquito').addEventListener('mouseenter', function() 
     this.style.left = Math.random() * 80 + 10 + '%';
 });
 
-// 5. JARDÍN Y CARTAS
 function generarJardin() {
     const jardin = document.getElementById('jardin');
     if(!jardin) return;

@@ -1,5 +1,5 @@
 const misFotos = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
-const razones = ["Tus preciosos ojos cafes", "Tu cabello", "Tu hermosa sonrisa", "Tus labios", "Tu inteligencia", "Tu forma de ser", "La manera en la que piensas", "Tu risa", "Tu amabilidad", "Tus pestañas", "Tus hermosos cachetitos", "Tu amor", "Tus abrazos", "Tus besos", "Tu honestidad", "Tu lealtad", "La forma en que me apoyas", "Tu voz", "Lo linda que te ves", "Tu mejora constante", "Tu comprension", "Tu humildad", "Tu caracter", "Tu forma de querer", "Tu forma de mirarme", "La manera en la que me amas", "Como te vistes", "Lo sensible que eres", "Tus enojos", "Tu sentido del humor", "Tu pasion", "Tu olor", "Tu sonrisa constante", "Tu seguridad", "Tu interes", "Tus regaños", "Tus mordidas", "Tus caricias", "Tus celos", "Tus caras", "Tu comedia", "Tu bella piel", "Tu alegria", "Tu perspectiva", "Tu amor por los paisajes", "Tu belleza incomparable", "Tu sencillez", "Tu precioso cuerpo", "Tu cariño", "Tus detalles", "Tu fortaleza", "Lo orgullosa que eres", "Todo para mi"];
+const razones = ["Tus preciosos ojos", "Tu sonrisa", "Tu forma de ser", "Tu apoyo", "Tu inteligencia", "Tu risa", "Tu bondad", "Tu paciencia", "Tu fuerza", "Tu mirada"]; // Agrega hasta las 100
 
 let cartasAbiertas = 0;
 
@@ -11,6 +11,7 @@ window.onload = () => {
         img.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 40 - 20}deg)`;
         stack.appendChild(img);
     });
+
     setTimeout(() => {
         document.getElementById('loader').style.opacity = '0';
         setTimeout(() => {
@@ -22,10 +23,15 @@ window.onload = () => {
 
 function irA(id) {
     const musica = document.getElementById('musica');
-    if (musica) musica.play().catch(() => {});
+    if (musica) { musica.play().catch(() => {}); }
+
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    if(id === 'pantalla3') { generarLluvia(); generarJardin(); }
+
+    if(id === 'pantalla3') {
+        generarLluvia();
+        generarJardin();
+    }
 }
 
 function generarLluvia() {
@@ -44,21 +50,12 @@ function generarLluvia() {
     }
 }
 
-function generarJardin() {
-    const jardin = document.getElementById('jardin');
-    jardin.innerHTML = '';
-    const imgs = ['Gerbera1.png', 'Gerbera2.png', 'Gerbera3.png'];
-    for(let i=0; i<15; i++) {
-        const img = document.createElement('img');
-        img.src = `img/${imgs[i%3]}`;
-        img.className = 'flor-brotando';
-        jardin.appendChild(img);
-    }
-}
-
 function iniciarTransicion() {
     irA('pantalla4');
-    setTimeout(() => { irA('pantalla5'); generarCartas(); }, 4000);
+    setTimeout(() => {
+        irA('pantalla5');
+        generarCartas();
+    }, 4000);
 }
 
 function generarCartas() {
@@ -73,7 +70,6 @@ function generarCartas() {
             this.innerHTML = r;
             cartasAbiertas++;
             document.getElementById('contador-flotante').innerText = `${cartasAbiertas} / ${razones.length}`;
-            if(cartasAbiertas === razones.length) confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         };
         container.appendChild(d);
     });
@@ -84,5 +80,6 @@ function moverBoton() {
     this.style.top = Math.random() * 80 + 10 + '%';
     this.style.left = Math.random() * 80 + 10 + '%';
 }
+
 document.getElementById('btnNo').onmouseover = moverBoton;
 document.getElementById('btnPoquito').onmouseover = moverBoton;

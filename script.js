@@ -1,5 +1,21 @@
 const misFotos = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
-const razones = ["Tus preciosos ojos cafes", "Tu cabello", "Tu hermosa sonrisa", "Tus labios", "Tu inteligencia", "Tu forma de ser", "La manera en la que piensas", "Tu risa", "Tu amabilidad", "Tus pestañas", "Tus hermosos cachetitos", "Tu amor", "Tus abrazos", "Tus besos", "Tu honestidad", "Tu lealtad", "La forma en que me apoyas", "Tu voz", "Lo linda que te ves", "Tu mejora constante", "Tu comprension", "Tu humildad", "Tu caracter", "Tu forma de querer", "Tu forma de mirarme", "La manera en la que me amas", "Como te vistes", "Lo sensible que eres", "Tus enojos", "Tu sentido del humor", "Tu pasion", "Tu olor", "Tu sonrisa constante", "Tu seguridad", "Tu interes", "Tus regaños", "Tus mordidas", "Tus caricias", "Tus celos", "Tus caras", "Tu comedia", "Tu bella piel", "Tu alegria", "Tu perspectiva", "Tu amor por los paisajes", "Tu belleza incomparable", "Tu sencillez", "Tu precioso cuerpo", "Tu cariño", "Tus detalles", "Tu fortaleza", "Lo orgullosa que eres", "Todo para mi"]; 
+const razones = [
+    "Tus preciosos ojos cafes", "Tu cabello", "Tu hermosa sonrisa", "Tus labios (muy ricos, por cierto)",
+    "Tu inteligencia", "Tu forma de ser", "La manera en la que piensas", "Tu risa",
+    "Tu amabilidad", "Tus pestañas", "Tus hermosos cachetitos", "Tu amor",
+    "Tus abrazos", "Tus besos", "Tu honestidad", "Tu lealtad",
+    "La forma en que me apoyas", "Tu voz (ojala seguir escuchandola toda la vida)", "Lo linda que te ves", "Tu mejora constante",
+    "Tu comprension", "Tu humildad", "Tu caracter", "Tu forma de querer y apoyar a las personas",
+    "Tu forma de mirarme", "La manera en la que me amas", "Como te vistes", "Lo sensible que eres",
+    "Tus enojos, te amo mi berrinchuda", "Tu sentido del humor", "Tu pasion por hacer las cosas", "Tu olor",
+    "Tus detalles", "Que no te gusta dejarme solo", "Tu seguridad", "Tu interes",
+    "Tus regaños", "Tus mordidas", "Las caricias que haces en mi cabello y orejas. ah y espalda", "Tu seguridad por lo que quieres",
+    "Tus celos", "Tus caras", "Tu comedia", "Tu bella piel",
+    "Tu alegria", "Tu risa contagiosa", "Tu actuar", "Tu perspectiva de todo",
+    "Tu amor por los paisajes, que por cierto tu eres el mas hermoso que existe", "Tu amor por tus tierras", "Tu belleza incomparable", "Tu apoyo",
+    "Tu sencillez", "Tu precioso cuerpo", "Tu cariño", "Tu rico olor",
+    "Tu fortaleza", "Lo orgullosa que eres", "Todo de ti"
+]; 
 
 let cartasAbiertas = 0;
 

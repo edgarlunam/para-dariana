@@ -112,8 +112,8 @@ section.active {
 
 .aislamiento-carta { 
     position: relative; 
-    width: 450px; 
-    height: 500px; 
+    width: 500px; 
+    height: 550px; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -136,22 +136,30 @@ section.active {
 
 .contenido-carta { 
     font-size: 1.1rem; 
-    line-height: 1.5; 
+    line-height: 1.6; 
     color: #333; 
-    max-height: 300px;    
+    max-height: 320px;    
     overflow-y: auto;     
-    padding-right: 10px;  
+    padding: 10px 20px 10px 10px;  
     margin-bottom: 15px;  
+    /* ESTO ES LO MÁS IMPORTANTE */
+    white-space: pre-line; /* Esto hará que respete los ENTERS que pongas en el texto */
+    text-align: left;
 }
 
 /* Estilo de la barra de scroll de la carta */
 .contenido-carta::-webkit-scrollbar {
-    width: 6px;
+    width: 10px;
 }
 
 .contenido-carta::-webkit-scrollbar-thumb {
     background: var(--rosa-mexicano);
     border-radius: 10px;
+    border: 2px solid #fffef0; /* Añade un pequeño borde para que resalte */
+}
+
+.contenido-carta::-webkit-scrollbar-thumb:hover {
+    background: #c2006a; /* Se oscurece un poco al pasar el mouse */
 }
 
 .btn-bienvenida { 

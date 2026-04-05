@@ -5,82 +5,91 @@
     --sombra-texto: 3px 3px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* CURSOR CORAZÓN */
+/* CURSOR DE CORAZÓN RECUPERADO */
 * {
     margin: 0; padding: 0; box-sizing: border-box;
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="%23e4007c" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
 }
 
-body { font-family: 'Dosis', sans-serif; background: #000; overflow: hidden; width: 100vw; height: 100vh; }
+body { font-family: 'Dosis', sans-serif; background: #000; overflow-x: hidden; }
 
-/* SECCIONES AISLADAS (Solución al estiramiento) */
-section {
-    display: none;
-    position: fixed; /* Esto evita que una pantalla empuje a otra */
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background-size: cover;
-    background-position: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
+/* Loader */
+#loader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: white; z-index: 2000; display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; transition: opacity 1s ease;
 }
-section.active { display: flex; z-index: 10; }
+#photo-stack { position: relative; width: 300px; height: 300px; }
+#photo-stack img {
+    position: absolute; width: 220px; height: 220px; object-fit: cover;
+    border: 10px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.titulo-loader { font-family: 'Dosis'; color: #333; margin-top: 20px; }
 
-/* FONDOS ESPECÍFICOS */
+/* Secciones y Fondos */
+section {
+    display: none; height: 100vh; width: 100%; background-size: cover; background-position: center;
+    flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    opacity: 0; transition: opacity 0.8s ease-in-out; position: relative;
+}
+section.active { display: flex; opacity: 1; }
+
 #pantalla-bienvenida { background: radial-gradient(circle, #fff5f8 0%, #ffdeeb 100%); }
 #pantalla1, #pantalla2 { background-image: url('img/Fondo1.jpg'); }
 #pantalla3, #pantalla4 { background-image: url('img/Fondo2.jpg'); }
-#pantalla5 { 
-    background-image: url('img/Fondo3.jpg'); 
-    position: relative; 
-    height: auto; 
-    min-height: 100vh; 
-    overflow-y: auto; 
-    display: none; 
-}
-#pantalla5.active { display: block; }
+#pantalla5 { background-image: url('img/Fondo3.jpg'); background-attachment: fixed; height: auto; min-height: 100vh; padding: 50px 0; }
 
-/* DISEÑO DE LA CARTA (PANTALLA BIENVENIDA) */
-.titulo-cumple { font-family: 'Pacifico', cursive; color: var(--rosa-mexicano); font-size: 2.8rem; margin-bottom: 20px; z-index: 20; }
-.carta-polaroid-wrapper { position: relative; width: 450px; height: 500px; display: flex; justify-content: center; align-items: center; }
+/* CARTA BIENVENIDA CENTRADA Y CORREGIDA */
+.titulo-cumple { font-family: 'Pacifico', cursive; color: var(--rosa-mexicano); font-size: 3rem; margin-bottom: 40px; text-shadow: 2px 2px white; }
+.carta-polaroid-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; max-width: 1100px; }
 
 .carta-escrita {
-    background: #fffef0; padding: 30px; width: 100%; height: 100%;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 4px;
+    background: #fffef0; padding: 40px; width: 500px; min-height: 550px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1); border-radius: 4px;
     z-index: 10; display: flex; flex-direction: column; justify-content: space-between; text-align: left;
 }
-.contenido-carta { font-size: 1.2rem; line-height: 1.5; color: #333; }
+.contenido-carta { font-size: 1.3rem; line-height: 1.6; color: #333; }
 
-.polaroid { position: absolute; background: white; padding: 10px 10px 25px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); width: 160px; z-index: 5; }
-.polaroid img { width: 100%; height: 120px; object-fit: cover; }
-.polaroid p { font-family: 'Pacifico', cursive; font-size: 0.8rem; text-align: center; margin-top: 5px; }
+.btn-bienvenida {
+    background: var(--rosa-mexicano); color: white; border: 2px solid white; padding: 15px 30px;
+    border-radius: 30px; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.3s; align-self: center;
+}
+.btn-bienvenida:hover { transform: scale(1.1); background: #ff4da6; }
 
-.p1 { top: -30px; left: -190px; transform: rotate(-12deg); }
-.p2 { top: -30px; right: -190px; transform: rotate(15deg); }
-.p3 { bottom: 10px; left: -200px; transform: rotate(8deg); }
-.p4 { bottom: 10px; right: -200px; transform: rotate(-10deg); }
+/* Polaroids */
+.polaroid { position: absolute; background: white; padding: 15px 15px 35px 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); width: 190px; }
+.polaroid img { width: 100%; height: 150px; object-fit: cover; }
+.polaroid p { font-family: 'Pacifico', cursive; font-size: 0.9rem; margin-top: 10px; color: #333; text-align: center; }
 
-/* BOTONES GERBERA */
+.p1 { top: -20px; left: -180px; transform: rotate(-12deg); }
+.p2 { top: -20px; right: -180px; transform: rotate(15deg); }
+.p3 { bottom: 0px; left: -190px; transform: rotate(8deg); }
+.p4 { bottom: 0px; right: -190px; transform: rotate(-10deg); }
+
+/* Letra y Elementos de las Preguntas (Recuperados de tus fotos) */
+.titulo { font-family: 'Pacifico', cursive; font-size: 3.5rem; text-shadow: var(--sombra-texto); color: white; }
+.titulo.grande { font-size: 5rem; }
+
 .btn-gerbera {
     background-image: url('img/Gerbera2.png'); background-size: contain; background-repeat: no-repeat;
     background-position: center; background-color: transparent; border: none;
-    width: 180px; height: 180px; color: white; font-weight: bold; font-size: 1.4rem; text-shadow: 2px 2px 4px black; transition: 0.3s;
+    width: 190px; height: 190px; color: white; font-weight: bold; font-size: 1.5rem; text-shadow: 2px 2px 4px black; transition: 0.3s;
 }
+.btn-gerbera:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); }
 
-/* BOTONES RECTANGULARES (PANTALLA 3) */
-.btn-rect {
-    background: var(--rosa-mexicano); color: white; padding: 15px 30px;
-    border: 2px solid white; border-radius: 15px; font-weight: bold; font-size: 1.2rem;
-    margin: 10px; transition: 0.3s;
+.btn-rect { background: var(--rosa-mexicano); color: white; padding: 15px 35px; border: 2px solid white; border-radius: 12px; font-weight: bold; font-size: 1.2rem; cursor: pointer; }
+.proximamente { color: white; font-weight: bold; text-shadow: var(--sombra-texto); margin-top: 5px; display: block; }
+
+/* Mosaico Final */
+#mosaico-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; }
+.sobre { background: rgba(255, 222, 235, 0.7); height: 140px; border-radius: 15px; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; cursor: pointer; }
+.hoja { background: white; color: #333; padding: 20px; border-radius: 10px; min-height: 140px; font-size: 1.4rem; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; }
+
+#contador-flotante { position: fixed; top: 20px; right: 20px; background: var(--rosa-mexicano); padding: 10px 20px; border-radius: 20px; color: white; font-weight: bold; z-index: 100; }
+.flor-brotando { height: 100px; position: absolute; bottom: 20px; z-index: 6; }
+
+@media (max-width: 900px) {
+    .polaroid { display: none; }
+    .carta-escrita { width: 90%; }
 }
-.btn-rect.disabled { background: #888; opacity: 0.7; cursor: not-allowed; }
-
-/* JARDÍN */
-#jardin { position: absolute; bottom: 0; width: 100%; height: 120px; display: flex; justify-content: center; }
-.flor-brotando { height: 100px; margin: 0 5px; }
-
-/* LOADER */
-#loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 1s; }

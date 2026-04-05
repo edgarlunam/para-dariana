@@ -1,6 +1,4 @@
 const misFotos = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
-
-// He añadido las razones que habías mencionado antes para que no se pierdan
 const razones = ["Tus preciosos ojos", "Tu sonrisa", "Tu forma de ser", "Tu apoyo", "Tu inteligencia", "Tu risa", "Tu bondad", "Tu paciencia", "Tu fuerza", "Tu mirada", "Tus labios", "Tu cabello", "Tus abrazos", "Tus besos", "Tu honestidad", "Tu lealtad", "La forma en que me apoyas", "Tu voz", "Lo linda que te ves", "Tu mejora constante"]; 
 
 let cartasAbiertas = 0;
@@ -30,9 +28,9 @@ function irA(id) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
 
+    // Aquí solo se genera la lluvia, el jardín ha sido quitado
     if(id === 'pantalla3') {
         generarLluvia();
-        generarJardin();
     }
 }
 
@@ -49,20 +47,6 @@ function generarLluvia() {
         f.style.animationDuration = (Math.random() * 3 + 4) + 's';
         f.style.animationDelay = Math.random() * 5 + 's';
         container.appendChild(f);
-    }
-}
-
-function generarJardin() {
-    const jardin = document.getElementById('jardin');
-    if(!jardin) return;
-    jardin.innerHTML = '';
-    const imgs = ['Gerbera1.png', 'Gerbera2.png', 'Gerbera3.png'];
-    for(let i=0; i<12; i++) {
-        const img = document.createElement('img');
-        img.src = `img/${imgs[i%3]}`;
-        img.style.height = "80px";
-        img.style.margin = "0 5px";
-        jardin.appendChild(img);
     }
 }
 

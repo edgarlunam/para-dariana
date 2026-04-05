@@ -22,72 +22,35 @@ section.active { display: flex; z-index: 10; }
 #pantalla-bienvenida { background: radial-gradient(circle, #fff5f8 0%, #ffdeeb 100%); }
 #pantalla1, #pantalla2 { background-image: url('img/Fondo1.jpg'); }
 #pantalla3, #pantalla4 { background-image: url('img/Fondo2.jpg'); }
+#pantalla5 { background-image: url('img/Fondo3.jpg'); position: relative; overflow: hidden; }
 
-/* Mejora Pantalla 5: Aseguramos que el fondo no se mueva al hacer scroll */
-#pantalla5 { 
-    background-image: url('img/Fondo3.jpg'); 
-    position: relative; 
-    overflow: hidden; 
-}
-
-/* AISLAMIENTO DE LA CARTA (Pantalla Bienvenida) */
+/* AISLAMIENTO DE LA CARTA */
 .cumple-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
 .titulo-cumple { font-family: 'Pacifico', cursive; color: var(--rosa-mexicano); font-size: 2.5rem; margin-bottom: 20px; text-shadow: 2px 2px white; z-index: 20; }
-
 .aislamiento-carta { position: relative; width: 450px; height: 500px; display: flex; justify-content: center; align-items: center; }
 .carta-escrita { background: #fffef0; padding: 30px; width: 100%; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 4px; z-index: 10; display: flex; flex-direction: column; justify-content: space-between; text-align: left; }
 .contenido-carta { font-size: 1.1rem; line-height: 1.5; color: #333; }
 .btn-bienvenida { background: var(--rosa-mexicano); color: white; border: 2px solid white; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; align-self: center; }
-
 .polaroid { position: absolute; background: white; padding: 10px 10px 25px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); width: 160px; z-index: 5; }
 .polaroid img { width: 100%; height: 120px; object-fit: cover; }
-.polaroid p { font-family: 'Pacifico', cursive; font-size: 0.8rem; text-align: center; margin-top: 5px; }
-
 .p1 { top: -30px; left: -190px; transform: rotate(-12deg); }
 .p2 { top: -30px; right: -190px; transform: rotate(15deg); }
 .p3 { bottom: 10px; left: -200px; transform: rotate(8deg); }
 .p4 { bottom: 10px; right: -200px; transform: rotate(-10deg); }
 
-/* Lluvia de Flores (Pantalla 3) */
+/* Lluvia de Flores */
 #lluvia-flores-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 .flor-cayendo { position: absolute; top: -100px; animation: caer linear infinite; }
 @keyframes caer { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
-.overlay-lluvia { z-index: 5; position: relative; }
 
-/* Botones y Letras */
+/* Botones */
 .titulo { font-family: 'Pacifico', cursive; font-size: 3.5rem; color: white; text-shadow: var(--sombra-texto); }
-.titulo.grande { font-size: 4.5rem; }
 .btn-gerbera { background-image: url('img/Gerbera2.png'); background-size: contain; background-repeat: no-repeat; background-color: transparent; border: none; width: 180px; height: 180px; color: white; font-weight: bold; font-size: 1.4rem; text-shadow: 2px 2px 4px black; }
 .btn-rect { background: var(--rosa-mexicano); color: white; padding: 15px 30px; border: 2px solid white; border-radius: 12px; font-weight: bold; font-size: 1.2rem; }
 
-/* Mosaico Corregido */
-.mosaico-scroll-wrapper {
-    width: 100%;
-    height: 75vh;
-    overflow-y: auto;
-    padding: 20px;
-}
-
-#mosaico-container { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 20px; 
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
+/* Mosaico Corregido con Scroll */
+.mosaico-scroll-wrapper { width: 100%; height: 75vh; overflow-y: auto; padding: 20px; }
+#mosaico-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: 0 auto; }
 .sobre { background: rgba(255,255,255,0.3); height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 3rem; cursor: pointer; border: 2px solid white; }
 .hoja { background: white; padding: 15px; border-radius: 10px; min-height: 120px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: #333; text-align: center; }
-
-#contador-flotante {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--rosa-mexicano);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    z-index: 100;
-}
+#contador-flotante { position: fixed; top: 20px; right: 20px; background: var(--rosa-mexicano); color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; z-index: 100; }

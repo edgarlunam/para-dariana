@@ -22,7 +22,13 @@ section.active { display: flex; z-index: 10; }
 #pantalla-bienvenida { background: radial-gradient(circle, #fff5f8 0%, #ffdeeb 100%); }
 #pantalla1, #pantalla2 { background-image: url('img/Fondo1.jpg'); }
 #pantalla3, #pantalla4 { background-image: url('img/Fondo2.jpg'); }
-#pantalla5 { background-image: url('img/Fondo3.jpg'); position: relative; overflow-y: auto; height: auto; min-height: 100vh; }
+
+/* Mejora Pantalla 5: Aseguramos que el fondo no se mueva al hacer scroll */
+#pantalla5 { 
+    background-image: url('img/Fondo3.jpg'); 
+    position: relative; 
+    overflow: hidden; 
+}
 
 /* AISLAMIENTO DE LA CARTA (Pantalla Bienvenida) */
 .cumple-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
@@ -54,7 +60,34 @@ section.active { display: flex; z-index: 10; }
 .btn-gerbera { background-image: url('img/Gerbera2.png'); background-size: contain; background-repeat: no-repeat; background-color: transparent; border: none; width: 180px; height: 180px; color: white; font-weight: bold; font-size: 1.4rem; text-shadow: 2px 2px 4px black; }
 .btn-rect { background: var(--rosa-mexicano); color: white; padding: 15px 30px; border: 2px solid white; border-radius: 12px; font-weight: bold; font-size: 1.2rem; }
 
-/* Mosaico */
-#mosaico-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 40px; }
-.sobre { background: rgba(255,255,255,0.3); height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-.hoja { background: white; padding: 15px; border-radius: 10px; min-height: 120px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+/* Mosaico Corregido */
+.mosaico-scroll-wrapper {
+    width: 100%;
+    height: 75vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+#mosaico-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 20px; 
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sobre { background: rgba(255,255,255,0.3); height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 3rem; cursor: pointer; border: 2px solid white; }
+.hoja { background: white; padding: 15px; border-radius: 10px; min-height: 120px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: #333; text-align: center; }
+
+#contador-flotante {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--rosa-mexicano);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    z-index: 100;
+}

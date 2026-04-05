@@ -1,5 +1,7 @@
 const misFotos = ['Foto.jpg', 'Foto1.jpg', 'Foto2.jpg', 'Foto3.jpg', 'Foto4.jpg', 'Foto5.jpg', 'Foto6.jpg', 'Foto7.jpg', 'Foto8.jpg', 'Foto9.jpg', 'Foto10.jpg', 'Foto11.jpg', 'Foto12.jpg', 'Foto13.jpg', 'Foto14.jpg'];
-const razones = ["Tus preciosos ojos", "Tu sonrisa", "Tu forma de ser", "Tu apoyo", "Tu inteligencia", "Tu risa", "Tu bondad", "Tu paciencia", "Tu fuerza", "Tu mirada"]; // Agrega hasta las 100
+
+// He añadido las razones que habías mencionado antes para que no se pierdan
+const razones = ["Tus preciosos ojos", "Tu sonrisa", "Tu forma de ser", "Tu apoyo", "Tu inteligencia", "Tu risa", "Tu bondad", "Tu paciencia", "Tu fuerza", "Tu mirada", "Tus labios", "Tu cabello", "Tus abrazos", "Tus besos", "Tu honestidad", "Tu lealtad", "La forma en que me apoyas", "Tu voz", "Lo linda que te ves", "Tu mejora constante"]; 
 
 let cartasAbiertas = 0;
 
@@ -50,6 +52,20 @@ function generarLluvia() {
     }
 }
 
+function generarJardin() {
+    const jardin = document.getElementById('jardin');
+    if(!jardin) return;
+    jardin.innerHTML = '';
+    const imgs = ['Gerbera1.png', 'Gerbera2.png', 'Gerbera3.png'];
+    for(let i=0; i<12; i++) {
+        const img = document.createElement('img');
+        img.src = `img/${imgs[i%3]}`;
+        img.style.height = "80px";
+        img.style.margin = "0 5px";
+        jardin.appendChild(img);
+    }
+}
+
 function iniciarTransicion() {
     irA('pantalla4');
     setTimeout(() => {
@@ -66,10 +82,14 @@ function generarCartas() {
         d.className = 'sobre';
         d.innerHTML = '✉️';
         d.onclick = function() {
+            if(this.className === 'hoja') return;
             this.className = 'hoja';
             this.innerHTML = r;
             cartasAbiertas++;
             document.getElementById('contador-flotante').innerText = `${cartasAbiertas} / ${razones.length}`;
+            if(cartasAbiertas === razones.length) {
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            }
         };
         container.appendChild(d);
     });

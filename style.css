@@ -28,9 +28,17 @@ section.active { display: flex; z-index: 10; }
 .cumple-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
 .titulo-cumple { font-family: 'Pacifico', cursive; color: var(--rosa-mexicano); font-size: 2.5rem; margin-bottom: 20px; text-shadow: 2px 2px white; z-index: 20; }
 .aislamiento-carta { position: relative; width: 450px; height: 500px; display: flex; justify-content: center; align-items: center; }
-.carta-escrita { background: #fffef0; padding: 30px; width: 100%; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 4px; z-index: 10; display: flex; flex-direction: column; justify-content: space-between; text-align: left; }
-.contenido-carta { font-size: 1.1rem; line-height: 1.5; color: #333; }
-.btn-bienvenida { background: var(--rosa-mexicano); color: white; border: 2px solid white; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; align-self: center; }
+.carta-escrita { background: #fffef0; padding: 30px; width: 100%; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 4px; z-index: 10; display: flex; flex-direction: column; justify-content: space-between; text-align: left; overflow: hidden;}
+.contenido-carta { font-size: 1.1rem; line-height: 1.5; color: #333; 
+/* NUEVAS PROPIEDADES */
+    max-height: 300px;    /* Ajusta esta altura según veas que quepa el botón abajo */
+    overflow-y: auto;     /* Activa el scroll vertical solo si el texto es muy largo */
+    padding-right: 10px;  /* Espacio para que la barra de scroll no tape las letras */
+    margin-bottom: 15px;  /* Separa el texto del botón */
+}
+.btn-bienvenida { background: var(--rosa-mexicano); color: white; border: 2px solid white; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; align-self: center; flex-shrink: 0; /* <--- AGREGA ESTO */
+    margin-top: 10px; /* <--- UN POQUITO DE ESPACIO EXTRA */
+}
 .polaroid { position: absolute; background: white; padding: 10px 10px 25px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); width: 160px; z-index: 5; }
 .polaroid img { width: 100%; height: 120px; object-fit: cover; }
 .p1 { top: -30px; left: -190px; transform: rotate(-12deg); }
